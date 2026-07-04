@@ -1,13 +1,10 @@
 'use client';
 
 import React, { useState } from 'react';
-import { useLanguage } from '@/context/LanguageContext';
+import Image from 'next/image';
 import { Calendar, Image as ImageIcon, Loader2, Sparkles, UploadCloud, X } from 'lucide-react';
-import { useRouter } from 'next/navigation';
 
 export default function AssignmentForm() {
-  const { t } = useLanguage();
-  const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
@@ -114,7 +111,7 @@ export default function AssignmentForm() {
                </>
              ) : (
                <div className="w-full relative">
-                 <img src={imagePreview} alt="Preview" className="w-full h-40 object-cover rounded-xl" />
+                  <Image src={imagePreview} alt="Preview" width={400} height={160} className="w-full h-40 object-cover rounded-xl" />
                  <button type="button" onClick={(e) => { e.preventDefault(); removeImage(); }} className="absolute -top-3 -right-3 w-8 h-8 bg-red-500 text-white rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform">
                    <X size={16} />
                  </button>

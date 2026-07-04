@@ -18,10 +18,6 @@ export default function ReminderForm() {
   const [saving, setSaving] = useState(false);
   const [deletingId, setDeletingId] = useState<string | null>(null);
 
-  useEffect(() => {
-    fetchSchedules();
-  }, []);
-
   const fetchSchedules = async () => {
     try {
       const res = await fetch('/api/schedules');
@@ -33,6 +29,10 @@ export default function ReminderForm() {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    fetchSchedules();
+  }, []);
 
   const calculateUpcomingDate = (dayOfWeek: number, timeString: string) => {
     const today = new Date();

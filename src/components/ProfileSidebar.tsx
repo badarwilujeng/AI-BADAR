@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { User, Mail, School, IdCard, BookOpen, Phone, MessageSquare, Save, Loader2, CheckCircle2, X } from 'lucide-react';
+import { User, School, IdCard, BookOpen, Phone, MessageSquare, Save, Loader2, CheckCircle2, X } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
 
 interface ProfileSidebarProps {
@@ -23,12 +23,6 @@ export default function ProfileSidebar({ isOpen, onClose }: ProfileSidebarProps)
     bio: '',
     phoneNumber: ''
   });
-
-  useEffect(() => {
-    if (isOpen) {
-      fetchProfile();
-    }
-  }, [isOpen]);
 
   const fetchProfile = async () => {
     setLoading(true);
@@ -52,6 +46,12 @@ export default function ProfileSidebar({ isOpen, onClose }: ProfileSidebarProps)
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    if (isOpen) {
+      fetchProfile(); // eslint-disable-line react-hooks/set-state-in-effect
+    }
+  }, [isOpen]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

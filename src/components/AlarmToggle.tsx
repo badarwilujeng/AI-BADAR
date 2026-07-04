@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Bell, BellOff, Volume2 } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
 
@@ -8,38 +8,35 @@ export default function AlarmToggle() {
   const { t } = useLanguage();
   const [isSubscribed, setIsSubscribed] = useState(false);
   const [permission, setPermission] = useState<string>('default');
-  const [audio, setAudio] = useState<HTMLAudioElement | null>(null);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      setAudio(new Audio('/alarm.mp3'));
-    }
-  }, []);
+    audioRef.current = new Audio('/alarm.mp3');
 
-  useEffect(() => {
     if (typeof window !== 'undefined' && 'Notification' in window) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setPermission(Notification.permission);
-      
+
       if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('/sw.js').catch(console.error);
-        
+
         navigator.serviceWorker.addEventListener('message', (event) => {
           if (event.data && event.data.type === 'PLAY_ALARM') {
-            audio?.play().catch(console.error);
+            audioRef.current?.play().catch(console.error);
           } else if (event.data && event.data.type === 'STOP_ALARM') {
-            audio?.pause();
-            if (audio) audio.currentTime = 0;
+            audioRef.current?.pause();
+            if (audioRef.current) audioRef.current.currentTime = 0;
           }
         });
       }
-      
+
       navigator.serviceWorker.ready.then(reg => {
         reg.pushManager.getSubscription().then(sub => {
           setIsSubscribed(!!sub);
         });
       });
     }
-  }, [audio]);
+  }, []);
 
   const toggleSubscription = async () => {
     if (permission !== 'granted') {
@@ -69,9 +66,9 @@ export default function AlarmToggle() {
   };
 
   const testAlarm = () => {
-    if (audio) {
-      audio.play().catch(() => alert(t('reminders.browserPolicy')));
-      setTimeout(() => { audio.pause(); audio.currentTime = 0; }, 3000);
+    if (audioRef.current) {
+      audioRef.current.play().catch(() => alert(t('reminders.browserPolicy')));
+      setTimeout(() => { audioRef.current?.pause(); if (audioRef.current) audioRef.current.currentTime = 0; }, 3000);
     }
   };
 

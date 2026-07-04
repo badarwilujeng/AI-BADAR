@@ -10,13 +10,12 @@ export default function ThemeToggle() {
     // Check saved preference or system preference
     const saved = localStorage.getItem('theme');
     if (saved === 'light') {
-      setDark(false);
+      setDark(false); // eslint-disable-line react-hooks/set-state-in-effect
       document.documentElement.classList.remove('dark');
     } else if (saved === 'dark') {
       setDark(true);
       document.documentElement.classList.add('dark');
     } else {
-      // Default to system preference
       const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
       setDark(prefersDark);
       if (prefersDark) {

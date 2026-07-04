@@ -12,7 +12,7 @@ import remarkGfm from 'remark-gfm';
 import rehypeHighlight from 'rehype-highlight';
 
 interface BubbleChatProps {
-  initialMessages?: any[];
+  initialMessages?: { id?: string; role: string; content: string }[];
   sessionId?: string;
 }
 

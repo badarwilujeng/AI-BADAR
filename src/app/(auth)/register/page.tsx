@@ -1,9 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { signIn } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
-import { LogIn, Mail, Lock, User, UserCircle, Loader2 } from 'lucide-react';
+import { Mail, Lock, User, UserCircle, Loader2 } from 'lucide-react';
 import ThemeToggle from '@/components/ThemeToggle';
 import Link from 'next/link';
 
@@ -72,7 +70,7 @@ export default function RegisterPage() {
               Buat <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-purple-500">Akun</span>
             </h1>
             <p className="text-gray-500 dark:text-slate-400 mt-3 text-sm font-medium tracking-wide italic leading-relaxed">
-              "Mulai perjalanan akademikmu dengan AI."
+              &ldquo;Mulai perjalanan akademikmu dengan AI.&rdquo;
             </p>
           </div>
 

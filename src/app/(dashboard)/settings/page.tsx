@@ -27,7 +27,7 @@ export default function SettingsPage() {
   useEffect(() => {
     const saved = localStorage.getItem('theme');
     if (saved) {
-      setThemeState(saved);
+      setThemeState(saved); // eslint-disable-line react-hooks/set-state-in-effect
     } else {
       setThemeState('system');
     }
@@ -80,7 +80,7 @@ export default function SettingsPage() {
         const data = await res.json();
         setError(data.message || 'Gagal mengubah password');
       }
-    } catch (err) {
+    } catch {
       setError('Terjadi kesalahan jaringan.');
     } finally {
       setLoading(false);

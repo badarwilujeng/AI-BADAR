@@ -18,6 +18,7 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     const savedLang = localStorage.getItem('app_lang') as Language;
     if (savedLang && (savedLang === 'id' || savedLang === 'en')) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setLangState(savedLang);
     }
     setMounted(true);
@@ -30,13 +31,14 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
 
   const t = (path: string): string => {
     const keys = path.split('.');
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let current: any = translations[lang];
     
     for (const key of keys) {
       if (current && current[key]) {
         current = current[key];
       } else {
-        return path; // Fallback to path string if not found
+        return path;
       }
     }
     

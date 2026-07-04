@@ -1,4 +1,4 @@
-import { HelpCircle, Mail, MessageSquare, ShieldCheck, ChevronRight } from 'lucide-react';
+import { HelpCircle, Mail, MessageSquare } from 'lucide-react';
 
 export default function HelpPage() {
   const faqs = [

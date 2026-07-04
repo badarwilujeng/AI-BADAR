@@ -1,14 +1,21 @@
 'use client';
 
-import { Search, Bell, Moon, Sun, ChevronDown } from 'lucide-react';
-import ThemeToggle from '@/components/ThemeToggle';
+import { Search, Bell, ChevronDown } from 'lucide-react';
 import { useState, useEffect } from 'react';
 
-export default function TopBar({ session }: { session: any }) {
+interface TopBarSession {
+  user?: {
+    name?: string | null;
+    email?: string | null;
+  } | null;
+}
+
+export default function TopBar({ session }: { session: TopBarSession }) {
   const user = session?.user;
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true);
   }, []);
 

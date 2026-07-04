@@ -1,4 +1,4 @@
-import { CalendarDays, MapPin, Clock, CalendarRange, Info } from 'lucide-react';
+import { CalendarDays, CalendarRange, Info } from 'lucide-react';
 
 export default function AcademicCalendarPage() {
   const events = [

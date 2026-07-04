@@ -1,10 +1,10 @@
-import { Box, Sparkles, Zap, BrainCircuit, MessageSquare, Bot, Search, Wind } from 'lucide-react';
+import { type LucideIcon } from 'lucide-react';
 
 export interface AIModel {
   id: string;
   name: string;
   provider: string;
-  icon: any;
+  icon: LucideIcon;
   color: string;
   description: string;
 }

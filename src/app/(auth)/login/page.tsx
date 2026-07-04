@@ -68,7 +68,7 @@ export default function LoginPage() {
               <h1 className="text-4xl font-black text-gray-900 dark:text-white tracking-tight leading-tight">
                 Welcome <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-purple-500">Back</span>
               </h1>
-              <p className="text-gray-500 dark:text-slate-400 mt-3 text-sm font-medium tracking-wide italic leading-relaxed">"Your academic journey, simplified by AI."</p>
+              <p className="text-gray-500 dark:text-slate-400 mt-3 text-sm font-medium tracking-wide italic leading-relaxed">&ldquo;Your academic journey, simplified by AI.&rdquo;</p>
            </div>
            
             <form onSubmit={handleLogin} className="space-y-6">

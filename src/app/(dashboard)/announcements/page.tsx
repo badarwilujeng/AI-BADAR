@@ -1,4 +1,4 @@
-import { Megaphone, Calendar, Tag, ChevronRight } from 'lucide-react';
+import { Megaphone, Calendar } from 'lucide-react';
 
 export default function AnnouncementsPage() {
   const announcements = [

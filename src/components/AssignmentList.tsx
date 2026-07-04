@@ -1,13 +1,21 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { CheckCircle2, Clock, Image as ImageIcon, Check, Trash2, Expand } from 'lucide-react';
-import { useRouter } from 'next/navigation';
+import Image from 'next/image';
+import { CheckCircle2, Clock, Check, Trash2, Expand } from 'lucide-react';
+
+interface Assignment {
+  id: string;
+  title: string;
+  description?: string | null;
+  dueDate: string;
+  isCompleted: boolean;
+  imageUrl?: string | null;
+}
 
 export default function AssignmentList() {
-  const [assignments, setAssignments] = useState<any[]>([]);
+  const [assignments, setAssignments] = useState<Assignment[]>([]);
   const [loading, setLoading] = useState(true);
-  const router = useRouter();
 
   const fetchAssignments = async () => {
     try {
@@ -22,6 +30,7 @@ export default function AssignmentList() {
   };
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchAssignments();
     // Quick polling to reflect additions from form refresh
     const interval = setInterval(fetchAssignments, 3000);
@@ -67,7 +76,7 @@ export default function AssignmentList() {
               {/* Image Preview */}
               {task.imageUrl && (
                 <div className="relative w-full sm:w-48 h-32 flex-shrink-0 rounded-2xl overflow-hidden cursor-pointer" onClick={() => window.open(task.imageUrl, '_blank')}>
-                   <img src={task.imageUrl} alt={task.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                   <Image src={task.imageUrl} alt={task.title} width={192} height={128} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex flex-col items-center justify-center transition-opacity text-white">
                       <Expand size={24} className="mb-1" />
                       <span className="text-[10px] font-black tracking-widest uppercase">Lihat Full</span>

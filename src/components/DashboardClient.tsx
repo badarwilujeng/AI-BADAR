@@ -8,15 +8,19 @@ import {
   UploadCloud,
   CheckCircle,
   Megaphone,
-  ChevronRight,
-  MapPin,
-  Clock
 } from 'lucide-react';
 import Link from 'next/link';
 import { useState } from 'react';
 import ProfileSidebar from '@/components/ProfileSidebar';
 
-export default function DashboardClient({ session }: { session: any }) {
+interface DashboardSession {
+  user?: {
+    name?: string | null;
+    email?: string | null;
+  } | null;
+}
+
+export default function DashboardClient({ session }: { session: DashboardSession }) {
   const userName = session.user?.name || session.user?.email.split('@')[0] || 'Badar';
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [showPresenceModal, setShowPresenceModal] = useState(false);
@@ -292,7 +296,9 @@ export default function DashboardClient({ session }: { session: any }) {
   );
 }
 
-function SimpleStatCard({ icon, value, title, label, color }: any) {
+function SimpleStatCard({ icon, value, title, label, color }: {
+  icon: React.ReactNode; value: string; title: string; label: string; color: string
+}) {
   return (
     <div className="glass-card p-5 rounded-2xl border border-gray-100 dark:border-white/5 hover:scale-[1.02] transition-all flex flex-col justify-between h-36">
       <div className={`w-9 h-9 ${color} rounded-xl flex items-center justify-center shrink-0`}>
@@ -317,7 +323,9 @@ function ScheduleRow({ time, subject, room }: { time: string, subject: string, r
   );
 }
 
-function TaskRow({ title, deadline, badgeText, badgeColor, dotColor }: any) {
+function TaskRow({ title, deadline, badgeText, badgeColor, dotColor }: {
+  title: string; deadline: string; badgeText: string; badgeColor: string; dotColor: string
+}) {
   return (
     <div className="flex items-center justify-between p-4 rounded-xl hover:bg-slate-50 dark:hover:bg-white/5 transition-all">
       <div className="flex items-center gap-3">
@@ -332,7 +340,9 @@ function TaskRow({ title, deadline, badgeText, badgeColor, dotColor }: any) {
   );
 }
 
-function QuickAccessIconButton({ href, color, icon, tooltip }: any) {
+function QuickAccessIconButton({ href, color, icon, tooltip }: {
+  href: string; color: string; icon: React.ReactNode; tooltip: string
+}) {
   return (
     <Link href={href} className="mx-auto" title={tooltip}>
       <div className={`w-12 h-12 rounded-2xl ${color} hover:scale-[1.05] active:scale-95 transition-all flex items-center justify-center shrink-0 shadow-sm`}>

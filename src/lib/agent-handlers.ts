@@ -34,7 +34,7 @@ export const agentHandlers = {
     });
   },
 
-  update_student_profile: async (userId: string, data: any) => {
+  update_student_profile: async (userId: string, data: { name?: string; studentId?: string; university?: string; major?: string; bio?: string }) => {
     return await prisma.user.update({
       where: { id: userId },
       data: {
@@ -54,7 +54,7 @@ export const agentHandlers = {
     });
   },
 
-  add_to_schedule: async (userId: string, data: any) => {
+  add_to_schedule: async (userId: string, data: { courseName: string; dayOfWeek: number; startTime: string; endTime: string; reminderOffset?: number }) => {
     const { courseName, dayOfWeek, startTime, endTime, reminderOffset = 15 } = data;
     
     const stDate = calculateUpcomingDate(dayOfWeek, startTime);
@@ -76,7 +76,7 @@ export const agentHandlers = {
     });
   },
 
-  remove_from_schedule: async (userId: string, data: any) => {
+  remove_from_schedule: async (userId: string, data: { scheduleId: string }) => {
     const { scheduleId } = data;
     
     // Verify ownership
@@ -88,7 +88,7 @@ export const agentHandlers = {
     return await prisma.schedule.delete({ where: { id: scheduleId } });
   },
 
-  set_schedule_status: async (userId: string, data: any) => {
+  set_schedule_status: async (userId: string, data: { scheduleId: string; isActive: boolean }) => {
     const { scheduleId, isActive } = data;
     
     // Verify ownership

@@ -51,11 +51,8 @@ export async function POST(req: NextRequest) {
       },
     });
 
-    // Exclude password from response
-    const { password: _, ...userWithoutPassword } = user;
-
     return NextResponse.json(
-      { message: 'Registrasi berhasil', user: userWithoutPassword },
+      { message: 'Registrasi berhasil', user: { id: user.id, name: user.name, email: user.email, studentId: user.studentId, role: user.role } },
       { status: 201 }
     );
   } catch (error) {

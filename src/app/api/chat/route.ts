@@ -1,4 +1,4 @@
-import { streamText, tool, stepCountIs } from 'ai';
+import { streamText, tool, stepCountIs, type ToolSet } from 'ai';
 import { google } from '@ai-sdk/google';
 import { auth } from '@/lib/auth';
 import prisma from '@/lib/prisma';
@@ -65,15 +65,17 @@ KEMAMPUAN AGENTIK:
     }
 
     // Convert aiTools to the format expected by streamText
-    const tools: any = {};
+    const tools: ToolSet = {};
     Object.entries(aiTools).forEach(([name, definition]) => {
       tools[name] = tool({
         description: definition.description,
         parameters: definition.parameters,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         execute: async (args: any) => {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           return await (definition as any).execute(args, { userId });
         },
-      } as any);
+      } as never);
     });
 
     const result = streamText({
@@ -102,9 +104,10 @@ KEMAMPUAN AGENTIK:
       }
     });
 
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Chat API Error:', error);
-    return new Response(JSON.stringify({ error: error.message || 'Internal server error' }), { 
+    const message = error instanceof Error ? error.message : 'Internal server error';
+    return new Response(JSON.stringify({ error: message }), { 
       status: 500,
       headers: { 'Content-Type': 'application/json' }
     });
