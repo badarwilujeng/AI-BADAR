@@ -1,0 +1,133 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --background: #f8fafc;
+  --foreground: #0f172a;
+  --card: #ffffff;
+  --indigo-soft: #eef2ff;
+  --border: #e2e8f0;
+  
+  --sidebar-bg: #f1f5f9;
+  --sidebar-active: #ffffff;
+  --accent-purple: #8b5cf6;
+  --accent-blue: #3b82f6;
+}
+
+.dark {
+  --background: #0b0b15;
+  --foreground: #f8fafc;
+  --card: #131326;
+  --indigo-soft: #1e1b4b;
+  --border: #1e293b;
+
+  --sidebar-bg: #13132b;
+  --sidebar-active: #20204a;
+  --accent-purple: #a855f7;
+  --accent-blue: #60a5fa;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-sidebar: var(--sidebar-bg);
+  --color-sidebar-active: var(--sidebar-active);
+  --color-indigo-soft: var(--indigo-soft);
+  --color-border-custom: var(--border);
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui;
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1), color 0.5s ease;
+  overflow-x: hidden;
+}
+
+/* Glassmorphism Utility */
+.glass {
+  @apply bg-white/70 dark:bg-slate-900/40 backdrop-blur-md border border-white/20 dark:border-white/10 shadow-xl;
+}
+
+.glass-card {
+  @apply bg-white dark:bg-[#1a1a3a]/40 backdrop-blur-xl border border-white/10 dark:border-white/5 shadow-2xl;
+}
+
+/* Custom Gradients */
+.grad-purple {
+  background: linear-gradient(135deg, #a855f7 0%, #7c3aed 100%);
+}
+
+.grad-blue {
+  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+}
+
+.grad-pink {
+  background: linear-gradient(135deg, #ec4899 0%, #be185d 100%);
+}
+
+.grad-emerald {
+  background: linear-gradient(135deg, #10b981 0%, #047857 100%);
+}
+
+/* Background Pattern */
+.bg-dot-pattern {
+  background-image: radial-gradient(rgba(99, 102, 241, 0.1) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.dark .bg-dot-pattern {
+  background-image: radial-gradient(rgba(99, 102, 241, 0.05) 1px, transparent 1px);
+}
+
+/* Markdown & Code Highlighting Styles */
+.prose pre {
+  @apply p-0 bg-transparent;
+}
+
+.prose code {
+  @apply px-1.5 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 text-indigo-600 dark:text-indigo-400 font-mono text-[0.9em];
+}
+
+.prose pre code {
+  @apply block p-4 bg-slate-900 text-slate-100 rounded-xl overflow-x-auto text-[0.85em] leading-relaxed;
+}
+
+.prose h1, .prose h2, .prose h3 {
+  @apply font-black tracking-tight mb-2 mt-4 text-gray-900 dark:text-white;
+}
+
+.prose ul, .prose ol {
+  @apply my-4 pl-5 space-y-2 list-disc;
+}
+
+.prose li {
+  @apply leading-relaxed;
+}
+
+.prose a {
+  @apply text-indigo-500 hover:text-indigo-600 underline decoration-2 underline-offset-4 transition-colors;
+}
+
+.prose table {
+  @apply w-full my-6 border-collapse text-sm;
+}
+
+.prose th {
+  @apply bg-slate-100 dark:bg-slate-800 p-3 text-left font-bold border border-slate-200 dark:border-slate-700;
+}
+
+.prose td {
+  @apply p-3 border border-slate-200 dark:border-slate-700;
+}
+
+/* Highlight.js Theme Overrides (Atom One Dark style) */
+.hljs-keyword, .hljs-selector-tag { @apply text-purple-400; }
+.hljs-string, .hljs-doctag { @apply text-green-400; }
+.hljs-title, .hljs-section, .hljs-selector-id { @apply text-blue-400; }
+.hljs-variable, .hljs-template-variable { @apply text-orange-400; }
+.hljs-comment { @apply text-slate-500 italic; }
+.hljs-number { @apply text-yellow-400; }
