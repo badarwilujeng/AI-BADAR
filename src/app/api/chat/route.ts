@@ -66,17 +66,21 @@ KEMAMPUAN AGENTIK:
 
     // Convert aiTools to the format expected by streamText
     const tools: ToolSet = {};
-    Object.entries(aiTools).forEach(([name, definition]) => {
-      tools[name] = tool({
-        description: definition.description,
-        parameters: definition.parameters,
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        execute: async (args: any) => {
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          return await (definition as any).execute(args, { userId });
+    type AiToolDef = {
+      description: string;
+      parameters: object;
+      execute: (args: unknown, ctx: { userId: string }) => Promise<unknown>;
+    };
+    for (const key of Object.keys(aiTools)) {
+      const def = aiTools[key as keyof typeof aiTools] as unknown as AiToolDef;
+      tools[key] = tool({
+        description: def.description,
+        parameters: def.parameters,
+        execute: async (args: unknown) => {
+          return await def.execute(args, { userId });
         },
       } as never);
-    });
+    }
 
     const result = streamText({
       model: google('gemini-2.0-flash'),

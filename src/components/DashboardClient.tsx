@@ -21,7 +21,7 @@ interface DashboardSession {
 }
 
 export default function DashboardClient({ session }: { session: DashboardSession }) {
-  const userName = session.user?.name || session.user?.email.split('@')[0] || 'Badar';
+  const userName = session.user?.name || session.user?.email?.split('@')[0] || 'Badar';
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [showPresenceModal, setShowPresenceModal] = useState(false);
   const [presenceSuccess, setPresenceSuccess] = useState(false);

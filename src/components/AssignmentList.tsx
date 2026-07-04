@@ -75,7 +75,7 @@ export default function AssignmentList() {
               
               {/* Image Preview */}
               {task.imageUrl && (
-                <div className="relative w-full sm:w-48 h-32 flex-shrink-0 rounded-2xl overflow-hidden cursor-pointer" onClick={() => window.open(task.imageUrl, '_blank')}>
+                <div className="relative w-full sm:w-48 h-32 flex-shrink-0 rounded-2xl overflow-hidden cursor-pointer" onClick={() => window.open(task.imageUrl!, '_blank')}>
                    <Image src={task.imageUrl} alt={task.title} width={192} height={128} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex flex-col items-center justify-center transition-opacity text-white">
                       <Expand size={24} className="mb-1" />

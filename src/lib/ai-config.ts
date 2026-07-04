@@ -1,4 +1,4 @@
-import { type LucideIcon } from 'lucide-react';
+import { type LucideIcon, Sparkles, Zap, BrainCircuit, MessageSquare, Bot, Box, Wind } from 'lucide-react';
 
 export interface AIModel {
   id: string;
