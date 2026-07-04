@@ -8,7 +8,8 @@ on:
 
 env:
   DATABASE_URL: "postgresql://johndoe:randomstring@localhost:5432/mydb?schema=public"
-
+  NEXT_PUBLIC_VAPI_PUBLIC_KEY: "mock_public_key"
+  VAPI_PUBLIC_KEY: "mock_public_key"
 jobs:
   lint-and-build:
     runs-on: ubuntu-latest
