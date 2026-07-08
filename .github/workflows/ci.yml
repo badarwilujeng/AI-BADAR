@@ -27,8 +27,12 @@ jobs:
       - name: Generate Prisma Client
         run: npx prisma generate
 
+      - name: Prepare SQLite database
+        run: npx prisma db push --skip-generate
+
       - name: Run Lint
         run: npm run lint
         continue-on-error: true
 
-      - run: npm run build
+      - name: Build app
+        run: npm run build
