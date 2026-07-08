@@ -7,7 +7,7 @@ on:
     branches: [main]
 
 env:
-  DATABASE_URL: "postgresql://johndoe:randomstring@localhost:5432/mydb?schema=public"
+  DATABASE_URL: "file:./prisma/dev.db"
   NEXT_PUBLIC_VAPI_PUBLIC_KEY: "mock_public_key"
   VAPI_PUBLIC_KEY: "mock_public_key"
 jobs:
